@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Application Instructions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        ol {
+            margin-top: 20px;
+        }
+        ol li {
+            margin-bottom: 10px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .example {
+            margin-top: 30px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .example-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .example-data {
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+        .example-code {
+            font-family: monospace;
+        }
+        .highlight {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to our E-commerce Application!</h1>
+        <p>Below are the instructions on how to use our application:</p>
+        <ol>
+            <li>Explore our wide range of products by visiting the <a href="/products">Products page</a>.</li>
+            <li>To view products by category, navigate to the <a href="/products/categories">Categories page</a>.</li>
+            <li>To view all products without pagination, visit the <a href="/products/all">All Products page</a>.</li>
+            <li>To view details of a single product:
+                <ul>
+                    <li>Visit the product's page by clicking on its name or image from the Products page.</li>
+                    <li>The product's page will display detailed information about the product.</li>
+                </ul>
+            </li>
+        </ol>
+
+        <div class="example">
+            <h2 class="example-title">Example Product Data</h2>
+            <div class="example-data">
+                <pre class="example-code">
+{
+  "_id": "65f44dfcf972fa9e7efe39fc",
+  "name": "iPhone 13",
+  "image": "https://res.cloudinary.com/drmz5eqh7/image/upload/v1710575609/products/E-commerce-images/arab.jpg",
+  "description": "The latest iPhone with 5G technology",
+  "price": 1229,
+  "originalPrice": 1119,
+  "discountPercentage": 10,
+  "categories": [
+    {
+      "_id": "65f2d7c9e4bbf58923889d81",
+      "name": "Electronics"
+    }
+  ],
+  "brands": [],
+  "stockQuantity": 10,
+  "isNewProduct": true,
+  "createdAt": "2024-03-15T13:32:44.876Z",
+  "updatedAt": "2024-03-16T07:54:36.305Z",
+  "__v": 0
+}
+                </pre>
+            </div>
+            <p>Here is an example of product data in our database:</p>
+            <div class="highlight">
+                <p>Name: iPhone 13</p>
+                <p>Description: The latest iPhone with 5G technology</p>
+                <p>Price: $1229</p>
+                <p>Original Price: $1119</p>
+                <p>Discount Percentage: 10%</p>
+                <p>Category: Electronics</p>
+                <p>Stock Quantity: 10</p>
+                <p>Is New Product: Yes</p>
+                <p>Created At: 2024-03-15 13:32:44</p>
+                <p>Updated At: 2024-03-16 07:54:36</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
