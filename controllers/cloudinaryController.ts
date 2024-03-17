@@ -16,8 +16,8 @@ interface UploadOptions {
 }
 
  export const commonUploadOptions: UploadOptions = {
-  folder: "products/E-commerce-images",
-  public_id: "arab",
+  folder: "food/food-server/images",
+  public_id: "food",
   overwrite: true,
 
 };
