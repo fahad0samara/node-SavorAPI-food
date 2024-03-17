@@ -1,129 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-commerce Application Instructions</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-        p {
-            color: #666;
-            margin-bottom: 10px;
-        }
-        ol {
-            margin-top: 20px;
-        }
-        ol li {
-            margin-bottom: 10px;
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .example {
-            margin-top: 30px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 20px;
-            background-color: #f0f0f0;
-        }
-        .example-title {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        .example-data {
-            white-space: pre-wrap;
-            overflow-x: auto;
-        }
-        .example-code {
-            font-family: monospace;
-        }
-        .highlight {
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API Instructions</title>
+<meta name="description" content="Instructions on how to use our API for accessing categories and products.">
+<meta name="keywords" content="API, instructions, categories, products, endpoints, usage, documentation">
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.usage-instructions, .api-endpoints {
+    margin-bottom: 30px;
+}
+
+.api-endpoint {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.code-block {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+.code-block p {
+    margin: 0;
+}
+
+.code-block pre {
+    margin: 0;
+}
+
+.code-block pre code {
+    white-space: pre-wrap;
+}
+
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to our E-commerce Application!</h1>
-        <p>Below are the instructions on how to use our application:</p>
-        <ol>
-            <li>Explore our wide range of products by visiting the <a href="/products">Products page</a>.</li>
-            <li>To view products by category, navigate to the <a href="/products/categories">Categories page</a>.</li>
-            <li>To view all products without pagination, visit the <a href="/products/all">All Products page</a>.</li>
-            <li>To view details of a single product:
-                <ul>
-                    <li>Visit the product's page by clicking on its name or image from the Products page.</li>
-                    <li>The product's page will display detailed information about the product.</li>
-                </ul>
-            </li>
-        </ol>
 
-        <div class="example">
-            <h2 class="example-title">Example Product Data</h2>
-            <div class="example-data">
-                <pre class="example-code">
-{
-  "_id": "65f44dfcf972fa9e7efe39fc",
-  "name": "iPhone 13",
-  "image": "https://res.cloudinary.com/drmz5eqh7/image/upload/v1710575609/products/E-commerce-images/arab.jpg",
-  "description": "The latest iPhone with 5G technology",
-  "price": 1229,
-  "originalPrice": 1119,
-  "discountPercentage": 10,
-  "categories": [
-    {
-      "_id": "65f2d7c9e4bbf58923889d81",
-      "name": "Electronics"
-    }
-  ],
-  "brands": [],
-  "stockQuantity": 10,
-  "isNewProduct": true,
-  "createdAt": "2024-03-15T13:32:44.876Z",
-  "updatedAt": "2024-03-16T07:54:36.305Z",
-  "__v": 0
-}
-                </pre>
-            </div>
-            <p>Here is an example of product data in our database:</p>
-            <div class="highlight">
-                <p>Name: iPhone 13</p>
-                <p>Description: The latest iPhone with 5G technology</p>
-                <p>Price: $1229</p>
-                <p>Original Price: $1119</p>
-                <p>Discount Percentage: 10%</p>
-                <p>Category: Electronics</p>
-                <p>Stock Quantity: 10</p>
-                <p>Is New Product: Yes</p>
-                <p>Created At: 2024-03-15 13:32:44</p>
-                <p>Updated At: 2024-03-16 07:54:36</p>
-            </div>
+<div class="container">
+    <h1>API Instructions</h1>
+    
+    <div class="usage-instructions">
+        <h2>Usage Instructions</h2>
+        <p>Welcome to our API! Below are the instructions on how to use it:</p>
+        
+        <div class="code-block">
+            <p><strong>Base URL:</strong> https://your-api-url.com/api</p>
         </div>
     </div>
+    
+    <div class="api-endpoints">
+        <div class="api-endpoint">
+            <h2>1. Get all categories</h2>
+            <p>Endpoint to retrieve all categories.</p>
+            <div class="code-block">
+                <p><strong>GET</strong> /categories</p>
+            </div>
+        </div>
+        
+        <div class="api-endpoint">
+            <h2>2. Get all products (without pagination)</h2>
+            <p>Endpoint to retrieve all products without pagination.</p>
+            <div class="code-block">
+                <p><strong>GET</strong> /products</p>
+            </div>
+        </div>
+        
+        <div class="api-endpoint">
+            <h2>3. Get paginated products</h2>
+            <p>Endpoint to retrieve products with pagination support.</p>
+            <div class="code-block">
+                <p><strong>GET</strong> /products?page=1&amp;pageSize=10</p>
+            </div>
+        </div>
+
+        <div class="api-endpoint">
+            <h2>4. Get a single product by ID</h2>
+            <p>Endpoint to retrieve a single product by its ID.</p>
+            <div class="code-block">
+                <p><strong>GET</strong> /products/:id</p>
+            </div>
+        </div>
+        
+        <div class="api-endpoint">
+            <h2>5. Create a new product</h2>
+            <p>Endpoint to create a new product.</p>
+            <div class="code-block">
+                <p><strong>POST</strong> /products</p>
+            </div>
+            <p>Include the following JSON data in the request body:</p>
+            <div class="code-block">
+                <pre><code>{
+    "name": "Product Name",
+    "description": "Product Description",
+    "price": 10.99,
+    "originalPrice": 12.99,
+    "discountPercentage": 15,
+    "stockQuantity": 100,
+    "isNewProduct": true,
+    "category": "Category ID",
+    "ingredients": ["Ingredient 1", "Ingredient 2"],
+    "allergens": ["Allergen 1", "Allergen 2"],
+    "servingSize": "100g",
+    "calories": 250,
+    "cookingInstructions": "Cooking instructions...",
+    "dietaryRestrictions": ["Vegetarian", "Gluten-free"],
+    "expirationDate": "2024-12-31"
+}</code></pre>
+            </div>
+        </div>
+        
+        <div class="api-endpoint">
+            <h2>6. Update a product by ID</h2>
+            <p>Endpoint to update an existing product by its ID.</p>
+            <div class="code-block">
+                <p><strong>PUT</strong> /products/:id</p>
+            </div>
+            <p>Include the following JSON data in the request body to update the product:</p>
+            <div class="code-block">
+                <pre><code>{
+    "name": "Updated Product Name",
+    "description": "Updated Product Description",
+    "price": 12.99,
+    "originalPrice": 14.99,
+    "discountPercentage": 20,
+    "stockQuantity": 150,
+    "isNewProduct": false,
+    "category": "Updated Category ID",
+    "ingredients": ["Updated Ingredient 1", "Updated Ingredient 2"],
+    "allergens": ["Updated Allergen 1", "Updated Allergen 2"],
+    "servingSize": "150g",
+    "calories": 300,
+    "cookingInstructions": "Updated Cooking instructions...",
+    "dietaryRestrictions": ["Vegetarian", "Gluten-free", "Dairy-free"],
+    "expirationDate": "2025-12-31"
+}</code></pre>
+            </div>
+        </div>
+        
+        <div class="api-endpoint">
+            <h2>7. Delete a product by ID</h2>
+            <p>Endpoint to delete an existing product by its ID.</p>
+            <div class="code-block">
+                <p><strong>DELETE</strong> /products/:id</p>
+            </div>
+        </div>
+        
+        <!-- Add more endpoints as needed -->
+    </div>
+</div>
+
 </body>
 </html>
