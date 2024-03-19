@@ -1,53 +1,0 @@
-{
-    "createProduct.title": "إضافة منتج جديد",
-    "createProduct.name": "اسم المنتج",
-    "createProduct.namePlaceholder": "أدخل اسم المنتج",
-    "createProduct.descriptionPlaceholder": "أدخل وصف المنتج",
-    "createProduct.pricePlaceholder": "أدخل سعر المنتج",
-    "createProduct.stockQuantityPlaceholder": "أدخل كمية المخزون",
-    "createProduct.discountPricePlaceholder": "أدخل سعر الخصم",
-    "createProduct.discountPercentagePlaceholder": "أدخل نسبة الخصم",
-    "createProduct.image": "صورة المنتج",
-    "createProduct.selectImageBtn": "اختر صورة المنتج",
-    "createProduct.description": "وصف المنتج",
-    "createProduct.price": "السعر",
-    "createProduct.stockQuantity": "كمية المخزون",
-    "createProduct.category": "الفئة",
-    "createProduct.isNewProduct": "هل المنتج جديد؟",
-    "createProduct.addDiscount": "هل ترغب في إضافة خصم للمنتج؟",
-    "createProduct.fillDiscountFields": "املأ حقول سعر الخصم ونسبة الخصم.",
-
-    "createProduct.discountPrice": "سعر الخصم",
-    "createProduct.discountPercentage": "  نسبة الخصم مثلا  10% " ,
-    "createProduct.selectCategory": "اختر فئة",
-    "createProduct.selectImage":  "اختر صورة المنتج",
-    "createProduct.createProductBtn": "إضافة المنتج",
-    "createProduct.successMessage": "تمت إضافة المنتج بنجاح",
-    "createProduct.errorMessage": "حدث خطأ أثناء إنشاء المنتج. يرجى المحاولة مرة أخرى لاحقًا.",
-    "createProduct.noResponseMessage": "لم يتم استلام استجابة من الخادم. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.",
-    "createProduct.unexpectedErrorMessage": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى لاحقًا.",
-    "createProduct.invalidImageError": "خطأ: يرجى تحديد ملف صورة",
-    "dashboard.HelloMessage": " مرحبا بك",
-    "dashboard.noProductsMessage": "لم تقم بإضافة أي منتج بعد.",
-  "dashboard.productCountMessage": "هنا المنتجات التي قمت بإضافتها حتى الآن.",
-  "dashboard.product": "منتج",
-  "dashboard.products": "منتجات",
-  "dashboard.thankYouMessage": "شكرا لمساعدتك! 💖",
-  "productAddedConfirmation.title": "تمت إضافة المنتج بنجاح!",
-  "productAddedConfirmation.message": "تمت إضافة منتجك بنجاح. يمكنك عرض المنتج في قائمة المنتجات.",
-  "productAddedConfirmation.addAnotherProduct": "إضافة منتج آخر",
-  "productAddedConfirmation.goToProducts": "الانتقال إلى المنتجات",
-  "navSide": {
-    "createProduct": "إضافة منتج",
-    "list": "قائمة المنتجات",
-    "userProducts": "منتجاتي"
-  },
-  "languageToggle": {
-    "english": "English",
-    "arabic": "العربية"
-  },
-  "toasts": {
-    "arabicCharactersNotAllowed": "الأحرف العربية غير مسموح بها.  "
-  }
-    }
-  
