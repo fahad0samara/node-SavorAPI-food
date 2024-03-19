@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.rtl {
+    direction: rtl;
+}
+
+
+.switch-container {
+    position: fixed;
+    top: 1rem; /* Adjust top position as needed */
+    right: 1rem; /* Adjust right position as needed */
+    z-index: 999; /* Ensure it's above other content */
+}
+
+/* Custom scrollbar styles */
+.scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+  }
+  
+  .scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(155, 155, 155, 0.5);
+    border-radius: 4px;
+    border: transparent;
+  }
+  
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(155, 155, 155, 0.7);
+  }
+  
+
