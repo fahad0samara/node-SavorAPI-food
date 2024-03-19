@@ -1,5 +1,6 @@
+// Import necessary modules and models
 import { Request, Response } from "express";
-import { Category, Product } from "../models/productModel";
+import {Category, Product} from "../models/productModel";
 import { commonUploadOptions, handleCloudinaryUpload } from "./cloudinaryController";
 
 // GET all categories
@@ -22,6 +23,12 @@ export const getAllProductsNoPagination = async (req: Request, res: Response) =>
       .populate('categories', 'name');
 
     res.json(products);
+
+
+
+
+
+
   } catch (error) {
     console.error('Error fetching products:', error);
     res.status(500).json({
@@ -30,6 +37,8 @@ export const getAllProductsNoPagination = async (req: Request, res: Response) =>
     });
   }
 };
+
+
 
 // GET paginated products
 export const getAllProducts = async (req: Request, res: Response) => {
@@ -45,12 +54,15 @@ export const getAllProducts = async (req: Request, res: Response) => {
       .skip((page - 1) * pageSize)
       .limit(pageSize); // Limit the number of products fetched by pageSize
 
+
+
     res.json({
-      products,
+      products: products,
       totalPages,
       currentPage: page,
     });
 
+    
   } catch (error) {
     console.error('Error fetching products:', error);
     res.status(500).json({
@@ -59,6 +71,7 @@ export const getAllProducts = async (req: Request, res: Response) => {
     });
   }
 };
+
 
 // GET a single product by ID
 export const getProductById = async (req: Request, res: Response) => {
@@ -79,18 +92,24 @@ export const getProductById = async (req: Request, res: Response) => {
 // POST a new product
 export const createProduct = async (req: Request, res: Response) => {
   try {
-    const { name, description, price, originalPrice, discountPercentage, stockQuantity, isNewProduct, category, ingredients, allergens, servingSize, calories, cookingInstructions, dietaryRestrictions, expirationDate } = req.body;
+    // Extract product data from request body, including category
+    const { name, description, price, originalPrice, discountPercentage, stockQuantity, isNewProduct, category } = req.body;
+
+    // Identify the user based on IP address
     const userIP = req.ip;
 
+    // Check if a file was uploaded
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
+    // Upload the image to Cloudinary
     const result = await handleCloudinaryUpload(commonUploadOptions, req.file.buffer, res);
     if (!result) {
       return;
     }
 
+    // Create a new Product document with image URL from Cloudinary and user IP address
     const product = new Product({
       name,
       description,
@@ -100,19 +119,14 @@ export const createProduct = async (req: Request, res: Response) => {
       discountPercentage,
       stockQuantity,
       isNewProduct,
-      categories: [category],
+      categories: [category], 
       userIP,
-      ingredients,
-      allergens,
-      servingSize,
-      calories,
-      cookingInstructions,
-      dietaryRestrictions,
-      expirationDate,
     });
 
+    // Save the product to the database
     await product.save();
 
+    // Return the created product in the response
     res.status(201).json(product);
   } catch (error) {
     console.error("Error creating product:", error);
@@ -123,12 +137,14 @@ export const createProduct = async (req: Request, res: Response) => {
   }
 };
 
+
 // GET products for a specific user
 export const getProductsByUser = async (req: Request, res: Response) => {
   try {
     const userIP = req.ip;
     console.log('User IP:', userIP)
 
+    // Find products associated with the user's IP address
     const products = await Product.find({ userIP });
 
     res.status(200).json(products);
@@ -140,19 +156,21 @@ export const getProductsByUser = async (req: Request, res: Response) => {
     });
   }
 };
-
-// PUT update a product by ID
 export const updateProductById = async (req: Request, res: Response) => {
   try {
-    const { name, description, price, originalPrice, discountPercentage, isNewProduct, categories, brands, stockQuantity, ingredients, allergens, servingSize, calories, cookingInstructions, dietaryRestrictions, expirationDate } = req.body;
+    const { name, description, price, originalPrice, discountPercentage, isNewProduct, categories, brands, stockQuantity } = req.body;
     let updatedProduct: any;
 
     if (req.file) {
+      // If a new image is provided, upload the image to Cloudinary
       const imageUri = await handleCloudinaryUpload(commonUploadOptions, req.file.buffer, res);
       if (!imageUri) {
         return;
       }
 
+
+
+      // If image upload is successful, update the product with the new image URL
       updatedProduct = await Product.findByIdAndUpdate(
         req.params.id,
         {
@@ -162,20 +180,16 @@ export const updateProductById = async (req: Request, res: Response) => {
           image: imageUri,
           originalPrice,
           discountPercentage,
+     
           isNewProduct,
           categories,
+  
           stockQuantity,
-          ingredients,
-          allergens,
-          servingSize,
-          calories,
-          cookingInstructions,
-          dietaryRestrictions,
-          expirationDate,
         },
         { new: true }
       );
     } else {
+      // If no new image is provided, update the product without changing the existing image
       updatedProduct = await Product.findByIdAndUpdate(
         req.params.id,
         {
@@ -184,16 +198,11 @@ export const updateProductById = async (req: Request, res: Response) => {
           price,
           originalPrice,
           discountPercentage,
+        
           isNewProduct,
           categories,
+    
           stockQuantity,
-          ingredients,
-          allergens,
-          servingSize,
-          calories,
-          cookingInstructions,
-          dietaryRestrictions,
-          expirationDate,
         },
         { new: true }
       );
@@ -215,6 +224,8 @@ export const updateProductById = async (req: Request, res: Response) => {
 
 export const deleteProductById = async (req: Request, res: Response) => {
   try {
+
+
     const deletedProduct = await Product.findByIdAndDelete(req.params.id);
     if (!deletedProduct) {
       return res.status(404).json({ message: 'Product not found' });

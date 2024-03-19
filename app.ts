@@ -49,15 +49,6 @@ app.listen(port, () => {
   console.log(`Server started at http://localhost:${port}`);
 });
 
-app.get('/get-user-data', (req: { ip: any; }, res: { json: (arg0: { userIP: any; }) => void; }) => {
-  const userIP = req.ip
-
-  console.log('User IP:', userIP);
-  
-
-
-  res.json({ userIP });
-});
 
 app.get('/', (req: any, res: { sendFile: (arg0: any) => void; }) => {
   res.sendFile(path.join(__dirname, 'instructions.html'));
