@@ -8,7 +8,7 @@ To get started with the Food API, follow these simple steps:
 
 1. **Clone the Repository**: Clone this repository to your local machine using the following command:
     ```
-    git clone https://github.com/your-username/food-api.git
+    git clone https://github.com/fahad0samara/node-SavorAPI-food-
     ```
 
 2. **Install Dependencies**: Navigate to the project directory and install the dependencies using npm:
