@@ -1,7 +1,10 @@
 // Import necessary modules and models
 import { Request, Response } from "express";
-import {Category, Product} from "../models/productModel";
-import { commonUploadOptions, handleCloudinaryUpload } from "./cloudinaryController";
+import { Category, Product } from "../models/productModel";
+import {
+  commonUploadOptions,
+  handleCloudinaryUpload,
+} from "./cloudinaryController";
 
 // GET all categories
 export const getAllCategories = async (req: Request, res: Response) => {
@@ -9,36 +12,30 @@ export const getAllCategories = async (req: Request, res: Response) => {
     const categories = await Category.find();
     res.json(categories);
   } catch (error) {
-    console.error('Error fetching categories:', error);
+    console.error("Error fetching categories:", error);
     res.status(500).json({
       error,
-      message: 'Internal server error',
-    });
-  }
-}
-
-export const getAllProductsNoPagination = async (req: Request, res: Response) => {
-  try {
-    const products = await Product.find()
-      .populate('categories', 'name');
-
-    res.json(products);
-
-
-
-
-
-
-  } catch (error) {
-    console.error('Error fetching products:', error);
-    res.status(500).json({
-      error,
-      message: 'Internal server error',
+      message: "Internal server error",
     });
   }
 };
 
+export const getAllProductsNoPagination = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const products = await Product.find().populate("categories", "name");
 
+    res.json(products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    res.status(500).json({
+      error,
+      message: "Internal server error",
+    });
+  }
+};
 
 // GET paginated products
 export const getAllProducts = async (req: Request, res: Response) => {
@@ -50,28 +47,23 @@ export const getAllProducts = async (req: Request, res: Response) => {
     const totalPages = Math.ceil(totalProducts / pageSize);
 
     const products = await Product.find()
-      .populate('categories', 'name')
+      .populate("categories", "name")
       .skip((page - 1) * pageSize)
       .limit(pageSize); // Limit the number of products fetched by pageSize
-
-
 
     res.json({
       products: products,
       totalPages,
       currentPage: page,
     });
-
-    
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error("Error fetching products:", error);
     res.status(500).json({
       error,
-      message: 'Internal server error',
+      message: "Internal server error",
     });
   }
 };
-
 
 // GET a single product by ID
 export const getProductById = async (req: Request, res: Response) => {
@@ -93,7 +85,16 @@ export const getProductById = async (req: Request, res: Response) => {
 export const createProduct = async (req: Request, res: Response) => {
   try {
     // Extract product data from request body, including category
-    const { name, description, price, originalPrice, discountPercentage, stockQuantity, isNewProduct, category } = req.body;
+    const {
+      name,
+      description,
+      price,
+      originalPrice,
+      discountPercentage,
+      stockQuantity,
+      isNewProduct,
+      category,
+    } = req.body;
 
     // Identify the user based on IP address
     const userIP = req.ip;
@@ -104,7 +105,11 @@ export const createProduct = async (req: Request, res: Response) => {
     }
 
     // Upload the image to Cloudinary
-    const result = await handleCloudinaryUpload(commonUploadOptions, req.file.buffer, res);
+    const result = await handleCloudinaryUpload(
+      commonUploadOptions,
+      req.file.buffer,
+      res
+    );
     if (!result) {
       return;
     }
@@ -119,7 +124,7 @@ export const createProduct = async (req: Request, res: Response) => {
       discountPercentage,
       stockQuantity,
       isNewProduct,
-      categories: [category], 
+      categories: [category],
       userIP,
     });
 
@@ -137,38 +142,49 @@ export const createProduct = async (req: Request, res: Response) => {
   }
 };
 
-
 // GET products for a specific user
 export const getProductsByUser = async (req: Request, res: Response) => {
   try {
     const userIP = req.ip;
-    console.log('User IP:', userIP)
+    console.log("User IP:", userIP);
 
     // Find products associated with the user's IP address
     const products = await Product.find({ userIP });
 
     res.status(200).json(products);
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error("Error fetching products:", error);
     res.status(500).json({
       error,
-      message: 'Internal server error',
+      message: "Internal server error",
     });
   }
 };
 export const updateProductById = async (req: Request, res: Response) => {
   try {
-    const { name, description, price, originalPrice, discountPercentage, isNewProduct, categories, brands, stockQuantity } = req.body;
+    const {
+      name,
+      description,
+      price,
+      originalPrice,
+      discountPercentage,
+      isNewProduct,
+      categories,
+      brands,
+      stockQuantity,
+    } = req.body;
     let updatedProduct: any;
 
     if (req.file) {
       // If a new image is provided, upload the image to Cloudinary
-      const imageUri = await handleCloudinaryUpload(commonUploadOptions, req.file.buffer, res);
+      const imageUri = await handleCloudinaryUpload(
+        commonUploadOptions,
+        req.file.buffer,
+        res
+      );
       if (!imageUri) {
         return;
       }
-
-
 
       // If image upload is successful, update the product with the new image URL
       updatedProduct = await Product.findByIdAndUpdate(
@@ -180,10 +196,10 @@ export const updateProductById = async (req: Request, res: Response) => {
           image: imageUri,
           originalPrice,
           discountPercentage,
-     
+
           isNewProduct,
           categories,
-  
+
           stockQuantity,
         },
         { new: true }
@@ -198,10 +214,10 @@ export const updateProductById = async (req: Request, res: Response) => {
           price,
           originalPrice,
           discountPercentage,
-        
+
           isNewProduct,
           categories,
-    
+
           stockQuantity,
         },
         { new: true }
@@ -209,32 +225,30 @@ export const updateProductById = async (req: Request, res: Response) => {
     }
 
     if (!updatedProduct) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
 
     res.json(updatedProduct);
   } catch (error) {
-    console.error('Error updating product:', error);
+    console.error("Error updating product:", error);
     res.status(500).json({
       error,
-      message: 'Internal server error',
+      message: "Internal server error",
     });
   }
 };
 
 export const deleteProductById = async (req: Request, res: Response) => {
   try {
-
-
     const deletedProduct = await Product.findByIdAndDelete(req.params.id);
     if (!deletedProduct) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
     res.json(deletedProduct);
   } catch (error) {
     res.status(500).json({
       error,
-      message: 'Internal server error',
+      message: "Internal server error",
     });
   }
 };
