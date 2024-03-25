@@ -9,6 +9,7 @@ cloudinary.config({
 
 });
 
+
 interface UploadOptions {
   folder: string;
   public_id: string;
@@ -19,7 +20,6 @@ interface UploadOptions {
   folder: "food/food-server/images",
   public_id: "food",
   overwrite: true,
-
 };
 
 export const handleCloudinaryUpload = async (
@@ -28,9 +28,17 @@ export const handleCloudinaryUpload = async (
   res: Response
 ): Promise<string | null> => {
   try {
+    // Generate a unique public_id using Date.now()
+    const uniquePublicId = `${options.public_id}-${Date.now()}`;
+
+    // Set the unique public_id in the options
+    const uniqueOptions = { ...options, public_id: uniquePublicId };
+    console.log("uniqueOptions", uniqueOptions);
+    
+
     const result: UploadApiResponse = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
-        options,
+        uniqueOptions, // Use unique options
         (error: any, result: any) => {
           if (error) {
             console.error("Error uploading image to Cloudinary:", error);
