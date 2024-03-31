@@ -7,7 +7,7 @@ const path = require('path');
 import mongoose from "mongoose";
 import productRoutes from './routes/productRoutes';
 
-import productRouter from "./routes/product";
+
 import { Category } from "./models/productModel";
 // MongoDB connection string with useNewUrlParser option included
 require('dotenv').config();

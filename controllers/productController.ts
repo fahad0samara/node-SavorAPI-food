@@ -177,16 +177,16 @@ export const updateProductById = async (req: Request, res: Response) => {
     } = req.body;
     let updatedProduct: any;
 
+
     if (req.file) {
       // If a new image is provided, upload the image to Cloudinary
-      const imageUri = await handleCloudinaryUpload(
-        commonUploadOptions,
-        req.file.buffer,
-        res
-      );
+      const imageUri = await handleCloudinaryUpload(commonUploadOptions, req.file.buffer, res);
       if (!imageUri) {
         return;
-      }
+      
+
+      };
+
 
       // If image upload is successful, update the product with the new image URL
       updatedProduct = await Product.findByIdAndUpdate(

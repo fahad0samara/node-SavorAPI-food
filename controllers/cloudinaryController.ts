@@ -1,14 +1,13 @@
 import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
 import { Response } from "express";
 
-cloudinary.config({ 
-  //fahad0arab
-  cloud_name: 'drmz5eqh7', 
-  api_key: '332722471545928', 
-  api_secret: 'peOGH2kHZ9ocSJZZY4Epio4SmsU',
-
+cloudinary.config({
+  
+  cloud_name: "dxeonqtqt",
+  api_key: "951973593716222",
+  api_secret: "jbw6V4Qlnw-dD153k_Ukz13cjN0",
+  secure: true,
 });
-
 
 interface UploadOptions {
   folder: string;
@@ -17,8 +16,8 @@ interface UploadOptions {
 }
 
  export const commonUploadOptions: UploadOptions = {
-  folder: "food/food-server/images",
-  public_id: "food",
+  folder: "food/food-images",
+  public_id: `food-${Date.now()}`,
   overwrite: true,
 };
 
@@ -33,7 +32,6 @@ export const handleCloudinaryUpload = async (
 
     // Set the unique public_id in the options
     const uniqueOptions = { ...options, public_id: uniquePublicId };
-    console.log("uniqueOptions", uniqueOptions);
     
 
     const result: UploadApiResponse = await new Promise((resolve, reject) => {
